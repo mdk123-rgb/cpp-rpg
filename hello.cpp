@@ -204,6 +204,11 @@ int main(){
     Character *warrior = new Warrior("Kratos", 12);
     Character *mage = new Mage("Magik", 9 );
     Character *rouge = new Rouge("Gabon_nie_gruby", 15);
+    
+    warrior->setStats(15, 10, 14, 8, 50, 5);
+    mage->setStats(8, 12, 10, 18, 40, 3);
+    rouge->setStats(10, 18, 12, 8, 45, 4);
+    
     warrior->attack(mage);
     rouge->attack(warrior);
     mage->attack(rouge);
