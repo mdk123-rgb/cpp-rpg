@@ -79,6 +79,9 @@ public:
     }   
 
     void heal(Character* target) override {
+        int healChance = rand() % 100 + 1;
+        if (healChance > 50){
+        
         int roll = rand() % 6 + 1;
         int healAmount = roll + (Intelligence /5) + (Level * 1);
         int afterHeal = target->getCurrentHP() + healAmount;
@@ -93,6 +96,12 @@ public:
             cout << "======" << endl;
             cout << Name << " leczy " << target->Name << " dodając: " << healAmount << " hp" << endl;
             
+        }
+    
+        }
+        else{
+            cout << "======" << endl;
+            cout << "Nie udało się wyleczyć" << endl;
         }
     }
 
@@ -144,6 +153,9 @@ public:
         }
     }
     void heal(Character* target) override {
+        int healChance = rand() % 100 + 1;
+        if (healChance > 50){
+        
         int roll = rand() % 6 + 1;
         int healAmount = roll + (Intelligence /5) + (Level * 1);
         int afterHeal = target->getCurrentHP() + healAmount;
@@ -158,6 +170,12 @@ public:
             cout << "======" << endl;
             cout << Name << " leczy " << target->Name << " dodając: " << healAmount << " hp" << endl;
             
+        }
+    
+        }
+        else{
+            cout << "======" << endl;
+            cout << "Nie udało się wyleczyć" << endl;
         }
     }
 
@@ -209,7 +227,7 @@ public:
     }
     void heal(Character* target) override {
         int healChance = rand() % 100 + 1;
-        if (healChance > 40){
+        if (healChance > 50){
         
         int roll = rand() % 6 + 1;
         int healAmount = roll + (Intelligence /5) + (Level * 1);
@@ -273,6 +291,6 @@ int main(){
     } else { // jeśli postać ma więcej niż 20% hp to atakuje przeciwnika
         postacie[attacker]->attack(postacie[target]);
     }
-        }
+    }
 }
 }
