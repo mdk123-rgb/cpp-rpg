@@ -59,12 +59,12 @@ public:
             cout << Name << " atakuje " << target-> Name << " mieczem, zadając: " << damage << endl;
             target->setHP(target->getCurrentHP() - damage);
             cout << target-> Name << " ma teraz: " << target->getCurrentHP() << " hp" << endl;
-            cout << "======" << endl;
+            
         }
         else{
             cout << "======" << endl;
             cout << "Nie trafiony" << endl;
-            cout << "======" << endl;
+            
         }
     }   
 
@@ -75,14 +75,14 @@ public:
         if (afterHeal > target->getMaxHP()){
             target->setHP(target->getMaxHP());
             cout << "======" << endl;
-            cout << Name << " leczy " << target->Name << "do maks hp" << "(" << target->getMaxHP() << " maxhp)" << endl;
-            cout << "======" << endl;
+            cout << Name << " leczy " << target->Name << " do maks hp " << "(" << target->getMaxHP() << " maxhp )" << endl;
+            
         }
         else {
             target->setHP(target->getCurrentHP() + healAmount);
             cout << "======" << endl;
-            cout << Name << " leczy " << target->Name << " dodająć: " << healAmount << " hp" << endl;
-            cout << "======" << endl;
+            cout << Name << " leczy " << target->Name << " dodając: " << healAmount << " hp" << endl;
+            
         }
     }
 
@@ -122,7 +122,7 @@ public:
         else{
             cout << "======" << endl;
             cout << "Nie trafiony" << endl;
-            cout << "======" << endl;
+            
         }
     }
     void heal(Character* target) override {
@@ -132,14 +132,14 @@ public:
         if (afterHeal > target->getMaxHP()){
             target->setHP(target->getMaxHP());
             cout << "======" << endl;
-            cout << Name << " leczy " << target->Name << "do maks hp" << "(" << target->getMaxHP() << " maxhp)" << endl;
-            cout << "======" << endl;
+            cout << Name << " leczy " << target->Name << " do maks hp " << "(" << target->getMaxHP() << " maxhp )" << endl;
+            
         }
         else {
             target->setHP(target->getCurrentHP() + healAmount);
             cout << "======" << endl;
-            cout << Name << " leczy " << target->Name << " dodająć: " << healAmount << " hp" << endl;
-            cout << "======" << endl;
+            cout << Name << " leczy " << target->Name << " dodając: " << healAmount << " hp" << endl;
+            
         }
     }
 
@@ -173,12 +173,12 @@ public:
             target->setHP(target->getCurrentHP() - damage);
             cout << Name << " atakuje " << target-> Name << " kuszą, zadając: " << damage << endl;
             cout << target-> Name << " ma teraz: " << target->getCurrentHP() << " hp" << endl;
-            cout << "======" << endl;
+            
         }
         else{
             cout << "======" << endl;
             cout << "Nie trafiony" << endl;
-            cout << "======" << endl;
+            
         }
     }
     void heal(Character* target) override {
@@ -188,14 +188,14 @@ public:
         if (afterHeal > target->getMaxHP()){
             target->setHP(target->getMaxHP());
             cout << "======" << endl;
-            cout << Name << " leczy " << target->Name << "do maks hp" << "(" << target->getMaxHP() << " maxhp)" << endl;
-            cout << "======" << endl;
+            cout << Name << " leczy " << target->Name << " do maks hp " << "(" << target->getMaxHP() << " maxhp )" << endl;
+            
         }
         else {
             target->setHP(target->getCurrentHP() + healAmount);
             cout << "======" << endl;
-            cout << Name << " leczy " << target->Name << " dodająć: " << healAmount << " hp" << endl;
-            cout << "======" << endl;
+            cout << Name << " leczy " << target->Name << " dodając: " << healAmount << " hp" << endl;
+            
         }
     }
 };
