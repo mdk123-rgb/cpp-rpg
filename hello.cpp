@@ -46,6 +46,7 @@ public:
         if (max_hp < 1) Max_HP = 1;
         else Max_HP = max_hp + (Constitution / 3) + Level;
         Armor_class = armor_class + (Strength / 3);
+        Current_HP = Max_HP;
     }
     void attack(Character* target) override {
         int hitChance = rand() % 20 + 1;
@@ -103,6 +104,7 @@ public:
         if (max_hp < 1) Max_HP = 1;
         else Max_HP = max_hp + (Constitution / 5) + Level;
         Armor_class = armor_class + (Intelligence / 3);
+        Current_HP = Max_HP;
     }
     void attack(Character* target) override {
         int hitChance = rand() % 20 + 1;
@@ -158,6 +160,7 @@ public:
         if (max_hp < 1) Max_HP = 1;
         else Max_HP = max_hp + (Constitution / 4) + Level;
         Armor_class = armor_class + (Dexterity / 3);
+        Current_HP = Max_HP;
     }
     void attack(Character* target) override {
         int hitChance = rand() % 20 + 1;
