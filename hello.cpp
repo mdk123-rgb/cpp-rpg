@@ -255,7 +255,7 @@ int main(){
 
     Character *warrior = new Warrior("Kratos", rand() % 100 + 1);
     Character *mage = new Mage("Magik", rand() % 100 + 1);
-    Character *rouge = new Rouge("Kominiarz", rand() % 100 + 1);
+    Character *rouge = new Rouge("Czarnuch", rand() % 100 + 1);
     
     warrior->setStats(rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 50 + 1, rand() % 20 + 1);
     mage->setStats(rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 50 + 1, rand() % 20 + 1);
@@ -276,7 +276,10 @@ int main(){
         }
     if (alive <= 1) { // jeśli została jedna postać albo nikt jest koniec gry, niby taki fail safe ale chyba useless bo wiadomość by sie zjebała 
         cout << "" << endl;
-        if (tura < 20000){
+        if (tura == 2137){
+            cout << "Oooooooo, panieeeeee, to ty na mnie spojrzałeś";
+        }
+        else if (tura < 20000){
             cout << "#############################KONIEC#############################" << endl;
             cout << postacie[lastAlive]->Name << " wygrał, szybko poszło " << endl;
             cout << "################################################################" << endl;
@@ -300,7 +303,7 @@ int main(){
         cout << "################################################################" << endl;
         cout << "" << endl;
         }
-        else if (tura > 1000000){
+        else if (tura >= 1000000){
             cout << "#############################KONIEC#############################" << endl;
         cout << postacie[lastAlive]->Name << " wygrał, KURWA ILE!!!!!" << endl;
         cout << "################################################################" << endl;
