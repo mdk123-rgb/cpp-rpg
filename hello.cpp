@@ -276,15 +276,21 @@ int main(){
         }
     if (alive <= 1) { // jeśli została jedna postać albo nikt jest koniec gry, niby taki fail safe ale chyba useless bo wiadomość by sie zjebała 
         cout << "" << endl;
-        if (tura > 20000){
+        if (tura <20000){
             cout << "#############################KONIEC#############################" << endl;
-            cout << postacie[lastAlive]->Name << " został ostatni na polu bitwy, wygrał walkę!" << endl;
+            cout << postacie[lastAlive]->Name << " wygrał, szybko poszło " << endl;
+            cout << "################################################################" << endl;
+            cout << "" << endl;
+        }
+        else if (tura > 20000){
+            cout << "#############################KONIEC#############################" << endl;
+            cout << postacie[lastAlive]->Name << " wygrał, nie było łatwo " << endl;
             cout << "################################################################" << endl;
             cout << "" << endl;
         }
         else if (tura > 50000){
             cout << "#############################KONIEC#############################" << endl;
-        cout << postacie[lastAlive]->Name << " ciężka walka, ale ostatecznia wygrana brawo!" << endl;
+        cout << postacie[lastAlive]->Name << " wygrał, ciężka walka, ale ostatecznia wygrana brawo!" << endl;
         cout << "################################################################" << endl;
         cout << "" << endl;
         }
