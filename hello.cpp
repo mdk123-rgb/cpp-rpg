@@ -16,10 +16,12 @@ public:
     virtual void setStats(int strength, int dexterity, int constitution, int intelligence, int max_hp, int armor_class) = 0;
     virtual void attack(Character* target) = 0;
     virtual void heal(Character* target) = 0;
-    void setHP(int hp) { Current_HP = hp; }
+    void setHP(int hp) { Current_HP = hp; } // to i reszta to gettery bo nie posłuchałem pana Adama i nie dałem wszystkiego do konstruktora
     int getArmor() { return Armor_class; }
     int getCurrentHP() { return Current_HP; }
     int getMaxHP() {return Max_HP;}
+    
+    bool isAlive() { return Current_HP > 0; } // takie wymuszone chyba nwm tak wsumie ale jest to check czy postac żyje w boolu (true, false)
 protected:
     int Level = 1;
     int Max_HP = 0;
@@ -243,8 +245,12 @@ int main(){
     for (int i = 0; i < 10; i++) { // i++ to skrót od i = i + 1 | ta pętla sie wykona 10 razy || na początku "i" ma wartość 0 potem "i" jest sprawdzane czy jest mniejsze niż 10, jeśli jest pętla sie wykona i dzięki "i++" i sie zwiekszy o 1 i potem jest znowu sprawdzane
         int attacker = rand() % 3; // % 3 losuje {0,1,2} czyli indeksy postaci  {warrior, mage, rouge}
         int target = rand() % 3;
-        if (attacker != target) { // check aby postac nie biła sama siebie
-            postacie[attacker]->attack(postacie[target]);
+        if (attacker != target && postacie[target]->isAlive()) { // poprostu check czy postac żyje | jeszcze && to jest poprostu AND
+            if (postacie[attacker]->getCurrentHP() < postacie[attacker]->getMaxHP() * 0.2) { // jeśli postac ma mniej niż 20% hp to sie sama uleczy
+        postacie[attacker]->heal(postacie[attacker]);
+    } else { // jeśli postać ma więcej niż 20% hp to atakuje przeciwnika
+        postacie[attacker]->attack(postacie[target]);
+    }
         }
 }
 }
