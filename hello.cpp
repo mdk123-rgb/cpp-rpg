@@ -47,6 +47,16 @@ public:
         else Max_HP = max_hp + (Constitution / 3) + Level;
         Armor_class = armor_class + (Strength / 3);
         Current_HP = Max_HP;
+        cout << "======" << endl;
+        cout << "Stworzono nową postać:: Imie: " << Name << "z poziomem: " << Level << endl;
+        cout << "HP: " << getCurrentHP() << endl;
+        cout << "Statystyki ▼" << endl;
+        cout << "Siła: " << Strength << endl;
+        cout << "Zwinność: " << Dexterity << endl; 
+        cout << "Konstytucja: " << Constitution << endl;
+        cout << "Inteligencja: " << Intelligence << endl;
+        
+
     }
     void attack(Character* target) override {
         int hitChance = rand() % 20 + 1;
@@ -105,6 +115,14 @@ public:
         else Max_HP = max_hp + (Constitution / 5) + Level;
         Armor_class = armor_class + (Intelligence / 3);
         Current_HP = Max_HP;
+        cout << "======" << endl;
+        cout << "Stworzono nową postać:: Imie: " << Name << "z poziomem: " << Level << endl;
+        cout << "HP: " << getCurrentHP() << endl;
+        cout << "Statystyki: ▼" << endl;
+        cout << "Siła: " << Strength << endl;
+        cout << "Zwinność: " << Dexterity << endl; 
+        cout << "Konstytucja: " << Constitution << endl;
+        cout << "Inteligencja: " << Intelligence << endl;
     }
     void attack(Character* target) override {
         int hitChance = rand() % 20 + 1;
@@ -161,6 +179,14 @@ public:
         else Max_HP = max_hp + (Constitution / 4) + Level;
         Armor_class = armor_class + (Dexterity / 3);
         Current_HP = Max_HP;
+        cout << "======" << endl;
+        cout << "Stworzono nową postać:: Imie: " << Name << "z poziomem: " << Level << endl;
+        cout << "HP: " << getCurrentHP() << endl;
+        cout << "Statystyki: ▼" << endl;
+        cout << "Siła: " << Strength << endl;
+        cout << "Zwinność: " << Dexterity << endl; 
+        cout << "Konstytucja: " << Constitution << endl;
+        cout << "Inteligencja: " << Intelligence << endl;
     }
     void attack(Character* target) override {
         int hitChance = rand() % 20 + 1;
@@ -208,17 +234,17 @@ int main(){
     Character *mage = new Mage("Magik", 9 );
     Character *rouge = new Rouge("Gabon_nie_gruby", 15);
     
-    warrior->setStats(15, 10, 14, 8, 50, 5);
-    mage->setStats(8, 12, 10, 18, 40, 3);
-    rouge->setStats(10, 18, 12, 8, 45, 4);
+    warrior->setStats(rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 100 + 1, rand() % 20 + 1);
+    mage->setStats(rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 100 + 1, rand() % 20 + 1);
+    rouge->setStats(rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 100 + 1, rand() % 20 + 1);
     
-    warrior->attack(mage);
-    rouge->attack(warrior);
-    mage->attack(rouge);
-    mage->attack(warrior);
-    warrior->attack(rouge);
-    rouge->attack(mage);
-    rouge->heal(mage);
-    warrior->heal(rouge);
-    mage->heal(warrior);
+
+    Character* postacie[3] = {warrior, mage, rouge}; // postacie[3], trzeba napisać trzy ponieważ indeksy ({warrior, mage, rouge}) zaczynają sie op 0 ale elementy w tabeli od 1 dlatego rozmiar tabeli to 3 [3]
+    for (int i = 0; i < 10; i++) { // i++ to skrót od i = i + 1 | ta pętla sie wykona 10 razy || na początku "i" ma wartość 0 potem "i" jest sprawdzane czy jest mniejsze niż 10, jeśli jest pętla sie wykona i dzięki "i++" i sie zwiekszy o 1 i potem jest znowu sprawdzane
+        int attacker = rand() % 3; // % 3 losuje {0,1,2} czyli indeksy postaci  {warrior, mage, rouge}
+        int target = rand() % 3;
+        if (attacker != target) { // check aby postac nie biła sama siebie
+            postacie[attacker]->attack(postacie[target]);
+        }
+}
 }
