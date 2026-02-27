@@ -263,7 +263,9 @@ int main(){
     
 
     Character* postacie[3] = {warrior, mage, rouge}; // postacie[3], trzeba napisać trzy ponieważ indeksy ({warrior, mage, rouge}) zaczynają sie op 0 ale elementy w tabeli od 1 dlatego rozmiar tabeli to 3 [3]
+    int tura = 0;
     while(true){ // pętla
+        tura++;
         int alive = 0;
         int lastAlive = 0;
         for (int i = 0; i < 3; i++) { // pętla która sprawdza każdą postać (z indeksu (0,1,2)) | i++ oznacza 
@@ -282,6 +284,7 @@ int main(){
         warrior->printStats();
         mage->printStats();
         rouge->printStats();
+        cout << "Ilość tur: " << tura << endl;
         break; // wychodzi z pętli while(true)
     }
         int attacker = rand() % 3; // % 3 losuje {0,1,2} czyli indeksy postaci  {warrior, mage, rouge}
