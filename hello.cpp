@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <random>
-#include <ctime>
 
 
 // klasa abstrakcyjna to klasa która nic w sobie nie ma ale jest wymagana w każdej innej sub-klasie
@@ -20,7 +19,6 @@ public:
     int getArmor() { return Armor_class; }
     int getCurrentHP() { return Current_HP; }
     int getMaxHP() {return Max_HP;}
-    
     bool isAlive() { return Current_HP > 0; } // takie wymuszone chyba nwm tak wsumie ale jest to check czy postac żyje w boolu (true, false)
 protected:
     int Level = 1;
@@ -242,7 +240,20 @@ int main(){
     
 
     Character* postacie[3] = {warrior, mage, rouge}; // postacie[3], trzeba napisać trzy ponieważ indeksy ({warrior, mage, rouge}) zaczynają sie op 0 ale elementy w tabeli od 1 dlatego rozmiar tabeli to 3 [3]
-    for (int i = 0; i < 10; i++) { // i++ to skrót od i = i + 1 | ta pętla sie wykona 10 razy || na początku "i" ma wartość 0 potem "i" jest sprawdzane czy jest mniejsze niż 10, jeśli jest pętla sie wykona i dzięki "i++" i sie zwiekszy o 1 i potem jest znowu sprawdzane
+    while(true){ // pętla
+        int alive = 0;
+        int lastAlive = 0;
+        for (int i = 0; i < 3; i++) { // pętla która sprawdza każdą postać (z indeksu (0,1,2)) | i++ oznacza 
+            if (postacie[i]->isAlive()) { // jeśli postać żyje to "i" sie zwiększa i sprawdza kolejną postać, jest to w pętli (while true wiec to ciągle chodzi)
+                alive++;
+                lastAlive = i; // zapamiętuje indeks ostatniej żywej postaci
+            }
+        }
+    if (alive <= 1) { // jeśli została jedna postać albo nikt jest koniec gry, niby taki fail safe ale chyba useless bo wiadomość by sie zjebała 
+        cout << "#############################KONIEC#############################" << endl;
+        cout << postacie[lastAlive]->Name << " Został ostatni na polu bitwy, wygrał walkę!" << endl;
+        break; // wychodzi z pętli while(true)
+    }
         int attacker = rand() % 3; // % 3 losuje {0,1,2} czyli indeksy postaci  {warrior, mage, rouge}
         int target = rand() % 3;
         if (attacker != target && postacie[target]->isAlive()) { // poprostu check czy postac żyje | jeszcze && to jest poprostu AND
