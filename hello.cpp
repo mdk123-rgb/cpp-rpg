@@ -262,7 +262,7 @@ int main(){
         cout << "" << endl;
         cout << "#############################KONIEC#############################" << endl;
         cout << postacie[lastAlive]->Name << " został ostatni na polu bitwy, wygrał walkę!" << endl;
-        cout << "#############################KONIEC#############################" << endl;
+        cout << "################################################################" << endl;
         break; // wychodzi z pętli while(true)
     }
         int attacker = rand() % 3; // % 3 losuje {0,1,2} czyli indeksy postaci  {warrior, mage, rouge}
