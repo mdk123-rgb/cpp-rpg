@@ -16,7 +16,7 @@ public:
     virtual void attack(Character* target) = 0;
     virtual void heal(Character* target) = 0;
     void setHP(int hp) { Current_HP = hp; } // to i reszta to gettery bo nie posłuchałem pana Adama i nie dałem wszystkiego do konstruktora
-    int getArmor() { return Armor_class; }
+    int getArmor() { return Armor_class; } // następnym razem dam te rzeczy do konstruktora bo to jest nie miłe, zamiast Current_HP musze getCurrentHP()
     int getCurrentHP() { return Current_HP; }
     int getMaxHP() {return Max_HP;}
     bool isAlive() { return Current_HP > 0; } // takie wymuszone chyba nwm tak wsumie ale jest to check czy postac żyje w boolu (true, false)
