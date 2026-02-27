@@ -20,6 +20,16 @@ public:
     int getCurrentHP() { return Current_HP; }
     int getMaxHP() {return Max_HP;}
     bool isAlive() { return Current_HP > 0; } // takie wymuszone chyba nwm tak wsumie ale jest to check czy postac żyje w boolu (true, false)
+    void printStats() { //drukowanie statów żeby było widać po walce co sie wylosowało
+        cout << "======" << endl;
+        cout << "Imie: " << Name << endl;
+        cout << "Level: " << Level << endl;
+        cout << "HP: " << Start_HP << endl;
+        cout << "Siła: " << Strength << endl;
+        cout << "Zwinność: " << Dexterity << endl; 
+        cout << "Konstytucja: " << Constitution << endl;
+        cout << "Inteligencja: " << Intelligence << endl;
+}
 protected:
     int Level = 1;
     int Max_HP = 0;
@@ -29,7 +39,9 @@ protected:
     int Constitution = 0;
     int Intelligence = 0;
     int Armor_class = 0;
+    int Start_HP = 0;
 };
+
 
 class Warrior : public Character {
 public:
@@ -47,17 +59,10 @@ public:
         else Max_HP = max_hp + (Constitution / 3) + Level;
         Armor_class = armor_class + (Strength / 3);
         Current_HP = Max_HP;
-        cout << "======" << endl;
-        cout << "Stworzono nową postać:: Imie: " << Name << "z poziomem: " << Level << endl;
-        cout << "HP: " << getCurrentHP() << endl;
-        cout << "Statystyki ▼" << endl;
-        cout << "Siła: " << Strength << endl;
-        cout << "Zwinność: " << Dexterity << endl; 
-        cout << "Konstytucja: " << Constitution << endl;
-        cout << "Inteligencja: " << Intelligence << endl;
-        
+        Start_HP = Max_HP;
 
     }
+    void printStats();
     void attack(Character* target) override {
         int hitChance = rand() % 20 + 1;
         int a = rand() % 10 + 1;
@@ -124,15 +129,10 @@ public:
         else Max_HP = max_hp + (Constitution / 5) + Level;
         Armor_class = armor_class + (Intelligence / 3);
         Current_HP = Max_HP;
-        cout << "======" << endl;
-        cout << "Stworzono nową postać:: Imie: " << Name << "z poziomem: " << Level << endl;
-        cout << "HP: " << getCurrentHP() << endl;
-        cout << "Statystyki: ▼" << endl;
-        cout << "Siła: " << Strength << endl;
-        cout << "Zwinność: " << Dexterity << endl; 
-        cout << "Konstytucja: " << Constitution << endl;
-        cout << "Inteligencja: " << Intelligence << endl;
+        Start_HP = Max_HP;
+
     }
+    void printStats();
     void attack(Character* target) override {
         int hitChance = rand() % 20 + 1;
         int a = rand() % 10 + 1;
@@ -197,15 +197,10 @@ public:
         else Max_HP = max_hp + (Constitution / 4) + Level;
         Armor_class = armor_class + (Dexterity / 3);
         Current_HP = Max_HP;
-        cout << "======" << endl;
-        cout << "Stworzono nową postać:: Imie: " << Name << "z poziomem: " << Level << endl;
-        cout << "HP: " << getCurrentHP() << endl;
-        cout << "Statystyki: ▼" << endl;
-        cout << "Siła: " << Strength << endl;
-        cout << "Zwinność: " << Dexterity << endl; 
-        cout << "Konstytucja: " << Constitution << endl;
-        cout << "Inteligencja: " << Intelligence << endl;
+        Start_HP = Max_HP;
+
     }
+    void printStats();
     void attack(Character* target) override {
         int hitChance = rand() % 20 + 1;
         int a = rand() % 10 + 1;
@@ -257,9 +252,10 @@ public:
 
 int main(){
     srand(time(0));  // odpalenie randoma
-    Character *warrior = new Warrior("Kratos", 12);
-    Character *mage = new Mage("Magik", 9 );
-    Character *rouge = new Rouge("Gabon_nie_gruby", 15);
+
+    Character *warrior = new Warrior("Kratos", rand() % 100 + 1);
+    Character *mage = new Mage("Magik", rand() % 100 + 1);
+    Character *rouge = new Rouge("Kominiarz", rand() % 100 + 1);
     
     warrior->setStats(rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 100 + 1, rand() % 20 + 1);
     mage->setStats(rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 100 + 1, rand() % 20 + 1);
@@ -281,6 +277,11 @@ int main(){
         cout << "#############################KONIEC#############################" << endl;
         cout << postacie[lastAlive]->Name << " został ostatni na polu bitwy, wygrał walkę!" << endl;
         cout << "################################################################" << endl;
+        cout << "" << endl;
+        cout << "STATYSTYKI WOJOWNIKÓW" << endl;
+        warrior->printStats();
+        mage->printStats();
+        rouge->printStats();
         break; // wychodzi z pętli while(true)
     }
         int attacker = rand() % 3; // % 3 losuje {0,1,2} czyli indeksy postaci  {warrior, mage, rouge}
