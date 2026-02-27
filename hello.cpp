@@ -257,9 +257,9 @@ int main(){
     Character *mage = new Mage("Magik", rand() % 100 + 1);
     Character *rouge = new Rouge("Kominiarz", rand() % 100 + 1);
     
-    warrior->setStats(rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 1000 + 1, rand() % 20 + 1);
-    mage->setStats(rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 1000 + 1, rand() % 20 + 1);
-    rouge->setStats(rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 1000 + 1, rand() % 20 + 1);
+    warrior->setStats(rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 50 + 1, rand() % 20 + 1);
+    mage->setStats(rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 50 + 1, rand() % 20 + 1);
+    rouge->setStats(rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 50 + 1, rand() % 20 + 1);
     
 
     Character* postacie[3] = {warrior, mage, rouge}; // postacie[3], trzeba napisać trzy ponieważ indeksy ({warrior, mage, rouge}) zaczynają sie op 0 ale elementy w tabeli od 1 dlatego rozmiar tabeli to 3 [3]
@@ -276,10 +276,32 @@ int main(){
         }
     if (alive <= 1) { // jeśli została jedna postać albo nikt jest koniec gry, niby taki fail safe ale chyba useless bo wiadomość by sie zjebała 
         cout << "" << endl;
-        cout << "#############################KONIEC#############################" << endl;
-        cout << postacie[lastAlive]->Name << " został ostatni na polu bitwy, wygrał walkę!" << endl;
+        if (tura > 20000){
+            cout << "#############################KONIEC#############################" << endl;
+            cout << postacie[lastAlive]->Name << " został ostatni na polu bitwy, wygrał walkę!" << endl;
+            cout << "################################################################" << endl;
+            cout << "" << endl;
+        }
+        else if (tura > 50000){
+            cout << "#############################KONIEC#############################" << endl;
+        cout << postacie[lastAlive]->Name << " ciężka walka, ale ostatecznia wygrana brawo!" << endl;
         cout << "################################################################" << endl;
         cout << "" << endl;
+        }
+        else if (tura > 100000){
+            cout << "#############################KONIEC#############################" << endl;
+        cout << postacie[lastAlive]->Name << " wygrał ale, 'Was it worth it?'" << endl;
+        cout << "################################################################" << endl;
+        cout << "" << endl;
+        }
+        else if (tura > 1000000){
+            cout << "#############################KONIEC#############################" << endl;
+        cout << postacie[lastAlive]->Name << " wygrał, KURWA ILE!!!!!" << endl;
+        cout << "################################################################" << endl;
+        cout << "" << endl;
+        }
+        
+        
         cout << "STATYSTYKI WOJOWNIKÓW" << endl;
         warrior->printStats();
         mage->printStats();
