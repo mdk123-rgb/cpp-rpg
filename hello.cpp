@@ -287,9 +287,9 @@ int main(){
         int attacker = rand() % 3; // % 3 losuje {0,1,2} czyli indeksy postaci  {warrior, mage, rouge}
         int target = rand() % 3;
         if (attacker != target && postacie[target]->isAlive()) { // poprostu check czy postac żyje | jeszcze && to jest poprostu AND
-            if (postacie[attacker]->getCurrentHP() < postacie[attacker]->getMaxHP() * 0.2) { // jeśli postac ma mniej niż 20% hp to sie sama uleczy
+            if (postacie[attacker]->getCurrentHP() < postacie[attacker]->getMaxHP() * 0.35) { // jeśli postac ma mniej niż 35% hp to sie sama uleczy
         postacie[attacker]->heal(postacie[attacker]);
-    } else { // jeśli postać ma więcej niż 20% hp to atakuje przeciwnika
+    } else { // jeśli postać ma więcej niż 35% hp to atakuje przeciwnika
         postacie[attacker]->attack(postacie[target]);
     }
     }
