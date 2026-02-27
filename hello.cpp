@@ -257,9 +257,9 @@ int main(){
     Character *mage = new Mage("Magik", rand() % 100 + 1);
     Character *rouge = new Rouge("Kominiarz", rand() % 100 + 1);
     
-    warrior->setStats(rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 100 + 1, rand() % 20 + 1);
-    mage->setStats(rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 100 + 1, rand() % 20 + 1);
-    rouge->setStats(rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 100 + 1, rand() % 20 + 1);
+    warrior->setStats(rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 1000 + 1, rand() % 20 + 1);
+    mage->setStats(rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 1000 + 1, rand() % 20 + 1);
+    rouge->setStats(rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 1000 + 1, rand() % 20 + 1);
     
 
     Character* postacie[3] = {warrior, mage, rouge}; // postacie[3], trzeba napisać trzy ponieważ indeksy ({warrior, mage, rouge}) zaczynają sie op 0 ale elementy w tabeli od 1 dlatego rozmiar tabeli to 3 [3]
