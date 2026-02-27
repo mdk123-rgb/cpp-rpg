@@ -6,7 +6,7 @@
 // klasa abstrakcyjna to klasa która nic w sobie nie ma ale jest wymagana w każdej innej sub-klasie
 // np klasa zwierze ma abstrakcyjną funkjce dzwiek ktora jest pusta ale sub klasa kot/pies musi jej uzyc
 
-using namespace std;
+using namespace std; // skrót bo nie chce mi sie pisać std::cout żeby printować
 
 class Character {
 public:
@@ -35,7 +35,7 @@ class Warrior : public Character {
 public:
     Warrior(string name, int lvl) : Character(name, lvl) {}
     void setStats(int strength, int dexterity, int constitution, int intelligence, int max_hp, int armor_class) override {
-        if (strength < 1 || strength > 20) Strength = 1;
+        if (strength < 1 || strength > 20) Strength = 1; // check czy staty są w zakresie 
         else Strength = strength;
         if (dexterity < 1 || dexterity > 20) Dexterity = 1;
         else Dexterity = dexterity;
@@ -208,6 +208,9 @@ public:
         }
     }
     void heal(Character* target) override {
+        int healChance = rand() % 100 + 1;
+        if (healChance > 40){
+        
         int roll = rand() % 6 + 1;
         int healAmount = roll + (Intelligence /5) + (Level * 1);
         int afterHeal = target->getCurrentHP() + healAmount;
@@ -222,6 +225,12 @@ public:
             cout << "======" << endl;
             cout << Name << " leczy " << target->Name << " dodając: " << healAmount << " hp" << endl;
             
+        }
+    
+        }
+        else{
+            cout << "======" << endl;
+            cout << "Nie udało się wyleczyć" << endl;
         }
     }
 };
@@ -250,8 +259,10 @@ int main(){
             }
         }
     if (alive <= 1) { // jeśli została jedna postać albo nikt jest koniec gry, niby taki fail safe ale chyba useless bo wiadomość by sie zjebała 
+        cout << "" << endl;
         cout << "#############################KONIEC#############################" << endl;
-        cout << postacie[lastAlive]->Name << " Został ostatni na polu bitwy, wygrał walkę!" << endl;
+        cout << postacie[lastAlive]->Name << " został ostatni na polu bitwy, wygrał walkę!" << endl;
+        cout << "#############################KONIEC#############################" << endl;
         break; // wychodzi z pętli while(true)
     }
         int attacker = rand() % 3; // % 3 losuje {0,1,2} czyli indeksy postaci  {warrior, mage, rouge}
