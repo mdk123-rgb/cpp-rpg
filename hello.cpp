@@ -16,6 +16,7 @@ public:
     virtual void setStats(int strength, int dexterity, int constitution, int intelligence, int max_hp, int armor_class) = 0;
     virtual void attack(Character* target) = 0;
     virtual void heal(Character* target) = 0;
+    int getArmor() { return Armor_class; }
 protected:
     int Level = 1;
     int Max_HP = 0;
@@ -45,15 +46,13 @@ public:
     }
     void attack(Character* target) override {
         srand(time(0));
-        int roll = rand() % 20 + 1;
-        if (roll == 20){
-            int isCritical = 1;
-            if (isCritical == true){
-                int crit_dmg = 1.5;
-            }
+        int hitChance = rand() % 20 + 1;
+        int a = rand() % 10 + 1;
+        int damage = a + (Strength / 5);
+        if (hitChance == 20) damage *= 1.5;
+        if (hitChance > target->getArmor()){
+            cout << Name << " atakuje " << target-> Name << " mieczem, zadając: " << damage << endl;
         }
-        
-
     }
 
 
@@ -75,7 +74,16 @@ public:
         else Max_HP = max_hp + (Constitution / 5) + Level;
         Armor_class = armor_class + (Intelligence / 3);
     }
-    void attack(Character* target) override {}
+    void attack(Character* target) override {
+        srand(time(0));
+        int hitChance = rand() % 20 + 1;
+        int a = rand() % 10 + 1;
+        int damage = a + (Intelligence / 5);
+        if (hitChance == 20) damage *= 2;
+        if (hitChance > target->getArmor()){
+            cout << Name << " atakuje " << target-> Name << " zaklęciem, zadając: " << damage << endl;
+        }
+    }
 
 };
 
@@ -95,7 +103,16 @@ public:
         else Max_HP = max_hp + (Constitution / 4) + Level;
         Armor_class = armor_class + (Dexterity / 3);
     }
-    void attack(Character* target) override {}
+    void attack(Character* target) override {
+        srand(time(0));
+        int hitChance = rand() % 20 + 1;
+        int a = rand() % 10 + 1;
+        int damage = a + (Dexterity / 5);
+        if (hitChance == 20) damage *= 3;
+        if (hitChance > target->getArmor()){
+            cout << Name << " atakuje " << target-> Name << " kuszą, zadając: " << damage << endl;
+        }
+    }
 };
 
 
@@ -103,5 +120,6 @@ public:
 int main(){
     srand(time(0));  // odpalenie randoma
     cout << "Zabawa ypieeeeee" << endl;
+
     return 0;
 }
