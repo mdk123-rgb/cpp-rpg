@@ -1,13 +1,12 @@
 #include <iostream>
 #include <string>
 #include <random>
-
-
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
 // klasa abstrakcyjna to klasa która nic w sobie nie ma ale jest wymagana w każdej innej sub-klasie
 // np klasa zwierze ma abstrakcyjną funkjce dzwiek ktora jest pusta ale sub klasa kot/pies musi jej uzyc
 
 using namespace std; // skrót bo nie chce mi sie pisać std::cout żeby printować
-
 class Character {
 public:
     Character(string name, int lvl) : Name(name), Level(lvl) {}
@@ -252,10 +251,12 @@ public:
 
 int main(){
     srand(time(0));  // odpalenie randoma
-
+    SDL_Init(SDL_INIT_AUDIO); // inicjalizacja SDL
+    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048); // otwarcie audio
+    Mix_Chunk *sound = Mix_LoadWAV("hitsound.wav"); // załadowanie pliku
     Character *warrior = new Warrior("Kratos", rand() % 100 + 1);
     Character *mage = new Mage("Magik", rand() % 100 + 1);
-    Character *rouge = new Rouge("Czarnuch", rand() % 100 + 1);
+    Character *rouge = new Rouge("Stealth boy", rand() % 100 + 1);
     
     warrior->setStats(rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 50 + 1, rand() % 20 + 1);
     mage->setStats(rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 50 + 1, rand() % 20 + 1);
@@ -266,6 +267,9 @@ int main(){
     int tura = 0;
     while(true){ // pętla
         tura++;
+        if (tura & 100 == 0){
+            Mix_PlayChannel(-1, sound, 0); // puszczenie dźwięku
+        }
         int alive = 0;
         int lastAlive = 0;
         for (int i = 0; i < 3; i++) { // pętla która sprawdza każdą postać (z indeksu (0,1,2)) | i++ oznacza 
@@ -316,16 +320,20 @@ int main(){
         mage->printStats();
         rouge->printStats();
         cout << "Ilość tur: " << tura << endl;
+        Mix_FreeChunk(sound); // zwolnienie pamięci
+        Mix_CloseAudio();
+        SDL_Quit();
         break; // wychodzi z pętli while(true)
     }
         int attacker = rand() % 3; // % 3 losuje {0,1,2} czyli indeksy postaci  {warrior, mage, rouge}
         int target = rand() % 3;
         if (attacker != target && postacie[target]->isAlive()) { // poprostu check czy postac żyje | jeszcze && to jest poprostu AND
-            if (postacie[attacker]->getCurrentHP() < postacie[attacker]->getMaxHP() * 0.35) { // jeśli postac ma mniej niż 35% hp to sie sama uleczy
+            if (postacie[attacker]->getCurrentHP() < postacie[attacker]->getMaxHP() * 0.35) { // jeśli postac ma mniej niż 35% hp to sie sam uleczy
         postacie[attacker]->heal(postacie[attacker]);
     } else { // jeśli postać ma więcej niż 35% hp to atakuje przeciwnika
         postacie[attacker]->attack(postacie[target]);
     }
     }
 }
+    return 0;
 }
