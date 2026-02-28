@@ -263,9 +263,9 @@ int main(){
     Character *mage = new Mage("Magik", rand() % 100 + 1);
     Character *rouge = new Rouge("Stealth boy", rand() % 100 + 1);
     
-    warrior->setStats(rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 50 + 1, rand() % 20 + 1);
-    mage->setStats(rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 50 + 1, rand() % 20 + 1);
-    rouge->setStats(rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 50 + 1, rand() % 20 + 1);
+    warrior->setStats(rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1);
+    mage->setStats(rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1);
+    rouge->setStats(rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1, rand() % 20 + 1);
     
 
     Character* postacie[3] = {warrior, mage, rouge}; // postacie[3], trzeba napisać trzy ponieważ indeksy ({warrior, mage, rouge}) zaczynają sie op 0 ale elementy w tabeli od 1 dlatego rozmiar tabeli to 3 [3]
@@ -283,12 +283,19 @@ int main(){
                 lastAlive = i; // zapamiętuje indeks ostatniej żywej postaci
             }
         }
+        if (tura > 1000000){
+            cout << "" << endl;
+            cout << "#############################KONIEC#############################" << endl;
+            cout << "ZARA PIERDOLNIE KURWA" << endl;
+            break;
+        }
     if (alive <= 1) { // jeśli została jedna postać albo nikt jest koniec gry, niby taki fail safe ale chyba useless bo wiadomość by sie zjebała 
         cout << "" << endl;
         cout << "#############################KONIEC#############################" << endl;
         if (tura == 2137){
             cout << "Oooooooo, panieeeeee, to ty na mnie spojrzałeś";
         }
+        
         else if (tura >= 1000000){
             cout << postacie[lastAlive]->Name << " wygrał, KURWA ILE!!!!!" << endl;
         }
@@ -330,6 +337,6 @@ int main(){
     auto stop = high_resolution_clock::now();
     auto duration = duration_cast<microseconds>(stop - start);
     double microseconds = duration.count() / 1000000.0;
-    cout << "Program zajął: " << microseconds << " sekund/y" << endl;
+    cout << "Program zajął: " << microseconds << " sekundy" << endl;
     return 0;
 }
