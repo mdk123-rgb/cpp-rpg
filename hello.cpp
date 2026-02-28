@@ -1,12 +1,15 @@
-#include <iostream>
-#include <string>
-#include <random>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_mixer.h>
+#include <iostream> //printy i inputy
+#include <string> //string
+#include <random> // random
+#include <SDL2/SDL.h> // dźwięk
+#include <SDL2/SDL_mixer.h> //dźwięk
+#include <chrono> // mierzenie czasu
+
 // klasa abstrakcyjna to klasa która nic w sobie nie ma ale jest wymagana w każdej innej sub-klasie
 // np klasa zwierze ma abstrakcyjną funkjce dzwiek ktora jest pusta ale sub klasa kot/pies musi jej uzyc
 
 using namespace std; // skrót bo nie chce mi sie pisać std::cout żeby printować
+using namespace std::chrono; //to samo
 class Character {
 public:
     Character(string name, int lvl) : Name(name), Level(lvl) {}
@@ -61,7 +64,7 @@ public:
         Start_HP = Max_HP;
 
     }
-    void printStats();
+
     void attack(Character* target) override {
         int hitChance = rand() % 20 + 1;
         int a = rand() % 10 + 1;
@@ -131,7 +134,7 @@ public:
         Start_HP = Max_HP;
 
     }
-    void printStats();
+
     void attack(Character* target) override {
         int hitChance = rand() % 20 + 1;
         int a = rand() % 10 + 1;
@@ -199,7 +202,7 @@ public:
         Start_HP = Max_HP;
 
     }
-    void printStats();
+
     void attack(Character* target) override {
         int hitChance = rand() % 20 + 1;
         int a = rand() % 10 + 1;
@@ -250,10 +253,12 @@ public:
 
 
 int main(){
+    auto start = high_resolution_clock::now();
     srand(time(0));  // odpalenie randoma
     SDL_Init(SDL_INIT_AUDIO); // inicjalizacja SDL
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048); // otwarcie audio
-    Mix_Chunk *sound = Mix_LoadWAV("hitsound.wav"); // załadowanie pliku
+    Mix_AllocateChannels(16); // zwiększenie liczby kanałów (standardowo to 1)
+    Mix_Chunk *sound = Mix_LoadWAV("audio/hitsound.wav"); // załadowanie pliku
     Character *warrior = new Warrior("Kratos", rand() % 100 + 1);
     Character *mage = new Mage("Magik", rand() % 100 + 1);
     Character *rouge = new Rouge("Stealth boy", rand() % 100 + 1);
@@ -267,8 +272,8 @@ int main(){
     int tura = 0;
     while(true){ // pętla
         tura++;
-        if (tura & 100 == 0){
-            Mix_PlayChannel(-1, sound, 0); // puszczenie dźwięku
+        if (tura % 100 == 0){
+            Mix_PlayChannel(0, sound, 0); // puszczenie dźwięku
         }
         int alive = 0;
         int lastAlive = 0;
@@ -280,39 +285,26 @@ int main(){
         }
     if (alive <= 1) { // jeśli została jedna postać albo nikt jest koniec gry, niby taki fail safe ale chyba useless bo wiadomość by sie zjebała 
         cout << "" << endl;
+        cout << "#############################KONIEC#############################" << endl;
         if (tura == 2137){
             cout << "Oooooooo, panieeeeee, to ty na mnie spojrzałeś";
         }
-        else if (tura < 20000){
-            cout << "#############################KONIEC#############################" << endl;
-            cout << postacie[lastAlive]->Name << " wygrał, szybko poszło " << endl;
-            cout << "################################################################" << endl;
-            cout << "" << endl;
-        }
-        else if (tura > 20000){
-            cout << "#############################KONIEC#############################" << endl;
-            cout << postacie[lastAlive]->Name << " wygrał, nie było łatwo " << endl;
-            cout << "################################################################" << endl;
-            cout << "" << endl;
-        }
-        else if (tura > 50000){
-            cout << "#############################KONIEC#############################" << endl;
-        cout << postacie[lastAlive]->Name << " wygrał, ciężka walka, ale ostatecznia wygrana brawo!" << endl;
-        cout << "################################################################" << endl;
-        cout << "" << endl;
+        else if (tura >= 1000000){
+            cout << postacie[lastAlive]->Name << " wygrał, KURWA ILE!!!!!" << endl;
         }
         else if (tura > 100000){
-            cout << "#############################KONIEC#############################" << endl;
-        cout << postacie[lastAlive]->Name << " wygrał ale, 'Was it worth it?'" << endl;
-        cout << "################################################################" << endl;
-        cout << "" << endl;
+            cout << postacie[lastAlive]->Name << " wygrał ale, 'Was it worth it?'" << endl;
         }
-        else if (tura >= 1000000){
-            cout << "#############################KONIEC#############################" << endl;
-        cout << postacie[lastAlive]->Name << " wygrał, KURWA ILE!!!!!" << endl;
-        cout << "################################################################" << endl;
-        cout << "" << endl;
+        else if (tura > 50000){
+            cout << postacie[lastAlive]->Name << " wygrał, ciężka walka, ale ostatecznie wygrana brawo!" << endl;
         }
+        else if (tura > 20000){
+            cout << postacie[lastAlive]->Name << " wygrał, nie było łatwo" << endl;
+        }
+        else {
+            cout << postacie[lastAlive]->Name << " wygrał, szybko poszło" << endl;
+        }
+        cout << "################################################################" << endl;
         
         
         cout << "STATYSTYKI WOJOWNIKÓW" << endl;
@@ -335,5 +327,9 @@ int main(){
     }
     }
 }
+    auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(stop - start);
+    double microseconds = duration.count() / 1000000.0;
+    cout << "Program zajął: " << microseconds << " sekund/y" << endl;
     return 0;
 }
