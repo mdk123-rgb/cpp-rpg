@@ -286,7 +286,7 @@ int main(){
         if (tura > 1000000){
             cout << "" << endl;
             cout << "#############################KONIEC#############################" << endl;
-            cout << "ZARA PIERDOLNIE KURWA" << endl;
+            cout << "Um, well accually this is too much procesing ☝️🤓" << endl;
             break;
         }
     if (alive <= 1) { // jeśli została jedna postać albo nikt jest koniec gry, niby taki fail safe ale chyba useless bo wiadomość by sie zjebała 
