@@ -87,7 +87,7 @@ public:
 
     void heal(Character* target) override {
         int healChance = rand() % 100 + 1;
-        if (healChance > 50){
+        if (healChance > 75){
         
         int roll = rand() % 6 + 1;
         int healAmount = roll + (Intelligence /5) + (Level * 1);
@@ -156,7 +156,7 @@ public:
     }
     void heal(Character* target) override {
         int healChance = rand() % 100 + 1;
-        if (healChance > 50){
+        if (healChance > 75){
         
         int roll = rand() % 6 + 1;
         int healAmount = roll + (Intelligence /5) + (Level * 1);
@@ -224,7 +224,7 @@ public:
     }
     void heal(Character* target) override {
         int healChance = rand() % 100 + 1;
-        if (healChance > 50){
+        if (healChance > 75){
         
         int roll = rand() % 6 + 1;
         int healAmount = roll + (Intelligence /5) + (Level * 1);
