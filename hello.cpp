@@ -336,7 +336,7 @@ int main(){
 }
     auto stop = high_resolution_clock::now();
     auto duration = duration_cast<microseconds>(stop - start);
-    double microseconds = duration.count() / 1000000.0;
-    cout << "Program zajął: " << microseconds << " sekundy" << endl;
+    double sekunda = duration.count() / 1000000.0;
+    cout << "Program zajął: " << sekunda << " sekundy" << endl;
     return 0;
 }
