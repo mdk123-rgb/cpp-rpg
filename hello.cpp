@@ -1,6 +1,6 @@
+#include <cstdlib>
 #include <iostream> //printy i inputy
 #include <string> //string
-#include <random> // random
 #include <SDL2/SDL.h> // dźwięk
 #include <SDL2/SDL_mixer.h> //dźwięk
 #include <chrono> // mierzenie czasu
@@ -339,4 +339,5 @@ int main(){
     double sekunda = duration.count() / 1000000.0;
     cout << "Program zajął: " << sekunda << " sekundy" << endl;
     return 0;
+    
 }
