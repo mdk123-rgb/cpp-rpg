@@ -274,7 +274,7 @@ int main(){
     int doge = 5;
     while(true){ // pętla
         tura++;
-        if (tura % 100 == 0){
+        if (tura % 1000 == 0){
             Mix_PlayChannel(0, sound, 0); // puszczenie dźwięku
         }
         int alive = 0;
