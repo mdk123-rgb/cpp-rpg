@@ -270,6 +270,8 @@ int main(){
 
     Character* postacie[3] = {warrior, mage, rouge}; // postacie[3], trzeba napisać trzy ponieważ indeksy ({warrior, mage, rouge}) zaczynają sie op 0 ale elementy w tabeli od 1 dlatego rozmiar tabeli to 3 [3]
     int tura = 0;
+    int dogeCounter = 0;
+    int doge = 5;
     while(true){ // pętla
         tura++;
         if (tura % 100 == 0){
@@ -300,7 +302,7 @@ int main(){
             cout << postacie[lastAlive]->Name << " wygrał, KURWA ILE!!!!!" << endl;
         }
         else if (tura > 100000){
-            cout << postacie[lastAlive]->Name << " wygrał ale, 'Was it worth it?'" << endl;
+            cout << postacie[lastAlive]->Name << " wygrał, ale 'Was it worth it?'" << endl;
         }
         else if (tura > 50000){
             cout << postacie[lastAlive]->Name << " wygrał, ciężka walka, ale ostatecznie wygrana brawo!" << endl;
@@ -319,6 +321,7 @@ int main(){
         mage->printStats();
         rouge->printStats();
         cout << "Ilość tur: " << tura << endl;
+        cout << "Ilość ominiętych ataków: " << dogeCounter << endl;
         Mix_FreeChunk(sound); // zwolnienie pamięci
         Mix_CloseAudio();
         SDL_Quit();
@@ -327,11 +330,21 @@ int main(){
         int attacker = rand() % 3; // % 3 losuje {0,1,2} czyli indeksy postaci  {warrior, mage, rouge}
         int target = rand() % 3;
         if (attacker != target && postacie[target]->isAlive()) { // poprostu check czy postac żyje | jeszcze && to jest poprostu AND
+        int toDoge = rand() % 100 + 1;
+        
             if (postacie[attacker]->getCurrentHP() < postacie[attacker]->getMaxHP() * 0.35) { // jeśli postac ma mniej niż 35% hp to sie sam uleczy
-        postacie[attacker]->heal(postacie[attacker]);
-    } else { // jeśli postać ma więcej niż 35% hp to atakuje przeciwnika
-        postacie[attacker]->attack(postacie[target]);
-    }
+                
+                postacie[attacker]->heal(postacie[attacker]);} 
+            else { // jeśli postać ma więcej niż 35% hp to atakuje przeciwnika
+                if ( doge < toDoge) {
+                    postacie[attacker]->attack(postacie[target]);
+                }
+                else{
+                    dogeCounter++;
+                    cout << "======" << endl;
+                    cout << "Ominięto atak" << endl;
+                }
+            }
     }
 }
     auto stop = high_resolution_clock::now();
